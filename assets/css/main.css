@@ -3591,6 +3591,13 @@ input, select, textarea {
 		object-fit: contain;
 	}
 
+section.untitleduniproject
+{
+	/*background-image: url("../../images/mechhead_header_image.png");*/
+	background-position: top;
+	object-fit: contain;
+}
+
 	@media screen and (max-width: 980px) {
 
 		#wrapper > header {
