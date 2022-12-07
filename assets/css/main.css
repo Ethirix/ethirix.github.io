@@ -3575,25 +3575,35 @@ input, select, textarea {
 
 		#wrapper > header {
 			padding: 9em 0 6.25em 0 ;
-			background-color: #2e3141;
-			background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url("../../images/bg.jpg");
-			background-size: auto,
- cover;
-			background-position: center,
- 0% 30%;
+			/*background-color: #2e3141;*/
+			/*background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url("../../images/bg.jpg");*/
+			background-size: auto, cover;
+			background-position: center, 0% 30%;
 			margin-bottom: -6.5em;
 		}
 
 	}
 
+	section.mechhead
+	{
+		background-image: url("../../images/mechhead_header_image.png");
+		background-position: top;
+		object-fit: contain;
+	}
+
+section.untitleduniproject
+{
+	/*background-image: url("../../images/mechhead_header_image.png");*/
+	background-position: top;
+	object-fit: contain;
+}
+
 	@media screen and (max-width: 980px) {
 
 		#wrapper > header {
 			padding: 11em 3em 7.375em 3em ;
-			background-size: auto,
- cover;
-			background-position: center,
- 0% 0%;
+			background-size: auto, cover;
+			background-position: center, 0% 0%;
 			margin-bottom: -4.75em;
 		}
 
