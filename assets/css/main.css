@@ -3588,16 +3588,15 @@ input, select, textarea {
 	{
 		background-image: url("../../images/mechhead_header_image.png");
 		background-position: top;
+		object-fit: contain;
 	}
 
 	@media screen and (max-width: 980px) {
 
 		#wrapper > header {
 			padding: 11em 3em 7.375em 3em ;
-			background-size: auto,
- cover;
-			background-position: center,
- 0% 0%;
+			background-size: auto, cover;
+			background-position: center, 0% 0%;
 			margin-bottom: -4.75em;
 		}
 
