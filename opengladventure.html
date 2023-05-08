@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<!--
+    Solid State by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>OpenGL Adventure - Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1><a href="index.html">Jack's Portfolio</a></h1>
+            <nav>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+	        <div class="inner">
+		        <h2>Menu</h2>
+		        <ul class="links">
+			        <li><a href="index.html">Main Page</a></li>
+			        <li><a href="opengladventure.html">OpenGL Adventure</a></li>
+			        <li><a href="s2dframework.html">S2D Framework</a></li>
+			        <li><a href="mechhead.html">Mech Head Framework</a></li>
+		        </ul>
+		        <a href="#" class="close">Close</a>
+	        </div>
+        </nav>
+
+        <!-- Wrapper -->
+        <section id="wrapper" style="background-image: url(images/opengl_adventure_header_image_PLACEHOLDER.png)">
+            <header>
+                <div class="inner">
+                    <h2>University Project - OpenGL Adventure</h2>
+                    <p>A Graphical Programming learning experience - utilizing OpenGL and FreeGLUT to start understanding the basics of Graphical Programming.</p>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="wrapper">
+                <div class="inner">
+
+	                <!--<h3 class="major">Gameplay Video</h3>
+	                <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
+		                <iframe allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+		                        src="https://www.youtube.com/embed/-yteyoy0fSw?rel=0&autoplay=1&mute=1" allow="autoplay">
+		                </iframe>
+	                </div>
+	                <br>-->
+
+                    <h3 class="major">Background</h3>
+                    <p>
+	                    This Project expands on the initial work done in the <a href="s2dframework.html" target="_blank">S2D Framework Project</a> by introducing us to what happens under the hood, as the S2D Framework is a 2D OpenGL Framework.
+	                    <br/><br/>
+	                    Initially we were given the task of drawing a shape onto the screen manually, using screen-space coordinates, by manually creating vertices and converting them into a polygon through OpenGL's functions.
+	                    <br/><br/>
+	                    After this, I started to create Classes that can store Object data, such as Transform, which contains two Vector3s, of which describe Position and Rotation. 
+	                    <br/>
+	                    Once this was completed I wrote a 2D N-gon generator and gave the data from this into Object Classes - which formed the basis of future work with 3D models and loading in from .obj files.
+	                    <br/>
+	                    Next for this was a Parent-Child relationship, which required researching how OpenGL handles it's Matrices internally. The solution for this was Popping and Pushing Matrices in order of how they would be seen in something like Unity's Scene Viewer.
+	                    <br/>
+	                    You Pop the Parent's Matrix, so the parent's transformations, then you Pop any children's Matrices and calculate the transformations and one the way back up you Push them back. 
+	                    <br/>
+	                    This is a recursive process and as such I wrote recursive function to handle this.
+	                    <br/><br/>
+	                    The next few things I worked on were pretty simple:
+	                    <ul>
+		                    <li>Converting the Camera to use Perspective instead of Orthographic views.</li>
+		                    <li>Use OpenGL Callbacks to get Keyboard data and write a Class to deal with the data separately.</li>
+		                    <li>Convert the Scene Graph to use LinkedLists instead of std::vector's - which improves memory efficiency as vectors may or may not free memory until it goes out of scope.</li>
+		                    <li>Allow the Screen to be resized without stretching the Viewport.</li>
+		                    <li>Converting to all Objects to use std::shared_ptr's so that Heap data is managed for me through Smart Pointers.</li>
+	                    </ul>
+	   
+	                    After those, the next two big things were loading 3D Objects from .obj files and Textures from .tga files.
+	                    <br/>
+	                    The format of .obj files is readable in UTF-8 so understanding what each line of data does becomes somewhat simpler.
+	                    <br/>
+	                    Each line of an .obj file starts with a 'token' that describes what the data on the line does. For example <b>'v 0.4 0.1 1.0'</b> describes a Vertex and its position relative to the centre of the object in 3D coordinates.
+	                    <br/>
+	                    Reading the data in was as simple as grabbing the 'token' and then an <i>if</i> statement to determine what the token does.
+	                    <br/><br/>
+	                    Texture files (.tga) on the other hand are not readable in UTF-8, as they are simply image files with a header of data.
+	                    <br/>
+	                    The header is 18 bytes and describes the image file, such as its Width, Height and Bit Depth - of which some of the data needs to be used by OpenGL to determine if:
+	                    <ol>
+		                    <li>The image is uncompressed</li>
+		                    <li>The image follows either RGB or RGBA formats</li>
+	                    </ol>
+	                    Once these checks pass, the rest of the data in the .tga file is the raw colour data, which can be read directly into an array and given to OpenGL to generate textures internally.
+                    </p>
+
+	                <!--									<section class="features">-->
+                    <!--										<article>-->
+                    <!--											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>-->
+                    <!--											<h3 class="major">Sed feugiat lorem</h3>-->
+                    <!--											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>-->
+                    <!--											<a href="#" class="special">Learn more</a>-->
+                    <!--										</article>-->
+                    <!--										<article>-->
+                    <!--											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>-->
+                    <!--											<h3 class="major">Nisl placerat</h3>-->
+                    <!--											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>-->
+                    <!--											<a href="#" class="special">Learn more</a>-->
+                    <!--										</article>-->
+                    <!--									</section>-->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <section id="footer">
+            <div class="inner">
+                <h2 class="major">Details</h2>
+                <ul class="actions">
+                    <li class="icon brands fa-linkedin"> - <a target="_blank" href="https://linkedin.com/in/ethirix">Jack Wright</a></li>
+                    <li class="icon brands fa-github"> - <a target="_blank" href="https://github.com/ethirix">Ethirix</a></li>
+                    <li class="icon brands fa-twitter"> - <a target="_blank" href="https://twitter.com/ethirix">@Ethirix</a></li>
+                </ul>
+                <ul class="copyright">
+                    <li>&copy; Jack Wright - All rights reserved.</li>
+                    <li>Design: <a target="_blank" href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
