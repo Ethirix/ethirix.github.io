@@ -6,7 +6,7 @@
 -->
 <html>
 <head>
-    <title>S2D Framework - Portfolio</title>
+    <title>GTA V Mods - Portfolio</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -32,7 +32,7 @@
 		        <h2>Menu</h2>
 		        <ul class="links">
 			        <li><a href="index.html">Main Page</a></li>
-                    <li><a href="learningdirectx11.html">Learning DirectX 11</a></li>
+			        <li><a href="learningdirectx11.html">Learning DirectX 11</a></li>
 			        <li><a href="opengladventure.html">OpenGL Adventure</a></li>
 			        <li><a href="s2dframework.html">S2D Framework</a></li>
                     <li><a href="gtavmods.html">GTA V Mods</a></li>
@@ -43,50 +43,72 @@
         </nav>
 
         <!-- Wrapper -->
-        <section id="wrapper" style="background-image: url(images/s2d_framework_header_image.png)">
+        <section id="wrapper" style="background-image: url(images/Initial_Euphorically_Splash.webp); background-size: contain; background-repeat: no-repeat">
             <header>
                 <div class="inner">
-                    <h2>University Project - S2D Framework</h2>
-                    <p>A pixel corridor shooter built upon a minimal OpenGL 2D Framework.</p>
+                    <h2>Self Projects - GTA V Mods</h2>
+                    <p>A collection of my GTA V Mods.</p>
                 </div>
             </header>
 
             <!-- Content -->
+            <!-- Content -->
             <div class="wrapper">
                 <div class="inner">
-
-                    <h3 class="major">Gameplay Video</h3>
+                    <h3 class="major">Yet Another Ragdoll Mod (YARM)</h3>
                     <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
                         <iframe allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                                src="https://www.youtube.com/embed/MqGDviF2MzA?rel=0&autoplay=1&mute=1" allow="autoplay">
+                                src="https://www.youtube.com/embed/w_5Riy4tY8s?rel=0&autoplay=1&mute=1" allow="autoplay">
                         </iframe>
                     </div>
-                    <br>
+                    <div style="text-align: center">
+                        <a href="https://github.com/Ethirix/Yet-Another-Ragdoll-Mod" target="_blank">GitHub Repository</a>
+                    </div>
+                    <p>
+                        <br>
+                        Yet Another Ragdoll Mod is a mod that I created because the other Ragdoll mods didn't have the options I wanted or... none at all.
+                        <br>
+                        The mod is very simple, all it does is toggles the character into a pure ragdoll state.
+                        <br><br>
+                        The mod does do a few things differently to the others I have tried out - many lack good config files
+                        or lack customization if one is present, usually just the keybind for the toggle. Mine also allows the user
+                        to decide if they wish for the Ragdoll to happen instantly, or how long after the keybind is pressed to "unragdoll".
+                        <br><br>
+                        There is one extra setting, the ability to allow the in game Parachute to take over if the character is falling.
+                        GTA V forces the character to always have a Parachute after a certain point and if you want to ragdoll off a tall
+                        building, it will kick in and deploy - this can disable that.
+                    </p>
 
-                    <h3 class="major">Background</h3>
-                    <article>
-                        <p>
-                            As part of the Fundamentals of Game and Graphical Systems Development (FOGGS) Module at Level 4, we had to create a game using an OpenGL Wrapper Framework provided by university.
-                            <br>
-                            It's intended for us to learn at a basic level how to program using a Graphical API in C++.
-                            <br>
-                            As someone who has done some work in Unity, I decided to sort of "recreate" some features of Unity, such as the Update() function.
-                            This allows me to facilitate to myself a (somewhat) familiar environment.
-                            <br>
-                            I spent quite a lot of time working on features that would speed up development time of actual gameplay. Such as:
-                            <ul>
-                                <li>A Texture Manager that gets the file names of all textures in a file and converts it to a key, so that you do not need to remember the file location - also is caps independent. Caveat however, if multiple files have the same name it the last loaded will be the only one loaded.</li>
-                                <br>
-                                <li>A Render Queue that determines the order of rendering. Objects with a value of 0 will be rendered first -or below- those of higher values. The order of rendering for same value objects is determined by their position in the Queue</li>
-                                <br>
-                                <li>Collisions - the collision system works somewhat similarly to Unity, when two objects touch, both will run any code either object has for collisions. On top of this, an object can be a Trigger, so that it doesn't block movement but can still run Collision Code</li>
-                                <br>
-                                <li>Safe Object Deletion - when an object is to be removed from the Game it is first added to a queue that is cleared at the end of every frame. This is to avoid any code that has reference to the object from attempting to run when the memory has been freed.</li>
-                                <br>
-                                <li>Time-based Animations - the frame time is used to calculate animations, for example an animation that updates 4 times a second needs to wait 250ms before it can be changed, the time between frames is added to a counter that when the counter goes equal to, or above the time requirement, will update the animation.</li>
-                            </ul>
-                        </p>
-                    </article>
+                    <h3 class="major">Euphorically</h3>
+                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
+                        <iframe allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                src="https://www.youtube.com/embed/Csk5x2CzzTI?rel=0&autoplay=1&mute=1" allow="autoplay">
+                        </iframe>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="https://github.com/Ethirix/Euphorically" target="_blank">GitHub Repository</a>
+                    </div>
+                    <p>
+                        <br>
+                        Note: the video above is outdated and is for an older, primitive version of the mod.
+                        <br><br>
+                        This mod is a far more complicated compared to YARM - it uses the Euphoria Active Ragdoll system
+                        to give the player reactions similar to that of the AI in the game.
+                        <br>
+                        For example, when someone is shot, they will be affected by the round hitting them, pushing them back
+                        potentially, they may also grab the wound or even fall over.
+                        <br><br>
+                        The mod has many configuration opens, from Euphoria chance, length and cooldown as well as whether to
+                        randomize the values of these each time, to give it a less robotic feeling.
+                        <br>
+                        There are also toggles for parts of the Euphoria system in case the user does not wish to use
+                        part of the system - such as ReachForWound or pointing the gun (one-handed weapons only due to GTA V limitation)
+                        at the attacker.
+                        <br><br>
+                        One of the biggest challenges with this mod was figuring out what Model Bones map to what Euphoria Bones.
+                        It turns out there are only 21 Euphoria Bones, but the character has many more (3 bones per finger!).
+                    </p>
+
 
                     <!--									<section class="features">-->
                     <!--										<article>-->
