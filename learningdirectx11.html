@@ -6,7 +6,7 @@
 -->
 <html>
 <head>
-    <title>Mech Head - Portfolio</title>
+    <title>Learning DirectX 11 - Portfolio</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -32,20 +32,23 @@
 		        <h2>Menu</h2>
 		        <ul class="links">
 			        <li><a href="index.html">Main Page</a></li>
+                    <li><a href="learningdirectx11.html">Learning DirectX 11</a></li>
 			        <li><a href="opengladventure.html">OpenGL Adventure</a></li>
 			        <li><a href="s2dframework.html">S2D Framework</a></li>
 			        <li><a href="mechhead.html">Mech Head Framework</a></li>
+                    <li><a href="gtavmods.html">GTA V Mods</a></li>
+
 		        </ul>
 		        <a href="#" class="close">Close</a>
 	        </div>
         </nav>
 
         <!-- Wrapper -->
-        <section id="wrapper" style="background-image: url(images/mechhead_header_image.png)">
+        <section id="wrapper" style="background-image: url(images/l_dx11_header_image_PLACEHOLDER.png); background-size: contain; background-repeat: no-repeat">
             <header>
                 <div class="inner">
-                    <h2>University Project - Mech Head</h2>
-                    <p>A Mech Shooter with varying enemies, weapons and ammo.</p>
+                    <h2>University Project - DirectX 11</h2>
+                    <p>Learning how to use DirectX 11 through </p>
                 </div>
             </header>
 
@@ -53,6 +56,7 @@
             <div class="wrapper">
                 <div class="inner">
 
+                    <!--
                     <h3 class="major">Gameplay Video</h3>
                     <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
                         <iframe allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
@@ -60,41 +64,57 @@
                         </iframe>
                     </div>
                     <br>
-                    <h3 class="major">Description</h3>
-                    <p>
-                        As a Mech Pilot, you're deployed to a terrorist incident in the city.
-                        <br>
-                        Your job as a battle-hardened mech pilot is to defend the city and destroy the terrorists.
-                        <br>
-                        They may be heavily armed so take weapons and resources from the ruins of their mechs.
-                        <br>
-                        Good luck.
-                    </p>
+                    -->
+
                     <h3 class="major">Background</h3>
                     <p>
-                        This was a project I was given in the first year of my Games Programming Course at Staffordshire University,
-                        we were tasked with creating a Mech-Shooter from the framework provided - called Mech Head.
-                        <br><br>
-                        This was given to use to teach us how to use Unreal (4) and how Blueprints work. As this was a
-                        Foundation Year project it was used as a way to teach people the "flow" of programming.
-                        <br><br>
-                        The framework given was bare-bones and I had to create my own Weapons and Enemies from the
-                        assets and built-in blueprints provided. I learned very quickly from the base blueprints
-                        and adapted them to suit my needs. Originally, the player could not pick up enemies weapons,
-                        however as a way of both providing the player with different weapons in a diagetic fashion, I
-                        decided to add the functionality.
-                        <br><br>
-                        Enemies also did not drop anything on death - like Ammo or Health, so I added a system that - based on
-                        what the enemies main weapon's ammo type was - dropped the ammo on the ground when the mech gets destroyed.
-                        The system also allowed for me to create my own drops so I could control how much resources
-                        were provided to the player so I could create a sense of scarsity with ammo while giving the player
-                        enough to get through the level without running out of ammo (unless they waste ammo).
-                        <br><br>
-                        The weapon infomation popup that is displayed when you hover over a weapon was modified to include
-                        additional data about the weapon, originally only the damage and which arm it was for.
-                        I added data such as rate of fire, ammo cost per shot and ammo type.
+                        Initially we were given a basic DX11 Project which created a window and initialized most of the under-lying
+                        DirectX specifics, such as the Render Pipeline.
                     </p>
+                    <h3 class="major">Starting Out</h3>
+                    <p>
+                        The first thing we were taught was how to navigate the project we were given.
+                        <br>
+                        Afterward we were told how to change the RasterizerState with <code>RSSetState()</code> to use wireframe instead of solid shading.
+                        <br>
+                        At this point I started deviating from the teaching and I implemented a keybind that closed the window on press.
+                        This took advantage of <code>WM_CLOSE</code> message which is passed to the <code>WndProc()</code> function to process the Windows Message.
+                        I realised that this will close the program even when it is not in focus, so I added a check which uses
+                        <code>GetForegroundWindow()</code> and compares it against the <code>HWND</code> of the DX11 window.
+                    </p>
+                    <h3 class="major">Refactoring</h3>
+                    <p>
+                        At this point the project was becoming a bit of a mess, as the code we were given was all in one <code>.cpp</code> file.
+                        This lead to a need to start refactoring much of the code to either be outside the <code>.cpp</code> or into a neater format.
+                        <br><br>
+                        To facility this I created a simple <code>.obj</code> that loads mesh data from a file and using this format, I figured out
+                        what data I can move from the main <code>.cpp</code>.
+                        <br>
+                        A lot of model data that was hardcoded in (a Cube) and the <code>Transform</code>s of objects could be
+                        immediately moved out.
+                    </p>
+                    <h3 class="major">Game or Render Object</h3>
+                    <p>
+                        As of writing this I am currently working on creating a Game or Render Object which handles
+                        each object in the scene.
+                        <br>
+                        Currently a <code>RenderObject</code> contains a <code>Mesh</code> and <code>Transform</code>.
+                        <br>
+                        <h4>Mesh</h4>
+                        A <code>Mesh</code> contains the raw data of the model so that it can be rendered to the scene, such as
+                        Vertices, Vertex Indices, <code>Material</code>, Vertex Buffer and Index Buffer.
+                        <br>
+                        The <code>Material</code> contains the data read in from the <code>.mtl</code> that is referenced in the <code>.obj</code>.
+                        <br><br>
+                        <h4>Transform</h4>
+                        The <code>Transform</code> contains the <code>XMFLOAT4X4</code> which represents the World Matrix of the object.
+                        <br>
+                        It keeps track of the Local Position of the object, which, if the object has no parent, is also the direct
+                        World Position. It also tracks the Scale of the object.
+                    <br>
+                        The <code>Transform</code> also holds a pointer to the <code>RenderObject</code>.
 
+                    </p>
                     <!--									<section class="features">-->
                     <!--										<article>-->
                     <!--											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>-->
