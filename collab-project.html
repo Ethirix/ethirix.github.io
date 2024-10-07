@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<!--
+    Solid State by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Collaboration Project - Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1><a href="index.html">Jack's Portfolio</a></h1>
+            <nav>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+	        <div class="inner">
+		        <h2>Menu</h2>
+		        <ul class="links">
+			        <li><a href="index.html">Main Page</a></li>
+                    <li>University Projects</li>
+                    <li><a href="learningdirectx11.html">Learning DirectX 11</a></li>
+                    <li><a href="collab-project.html">Unreal 5 Collab Project</a></li>
+			        <li><a href="opengladventure.html">OpenGL Adventure</a></li>
+			        <li><a href="s2dframework.html">S2D Framework</a></li>
+			        <li><a href="mechhead.html">Mech Head Framework</a></li>
+                    <li>Self Projects</li>
+                    <li><a href="gtavmods.html">GTA V Mods</a></li>
+		        </ul>
+		        <a href="#" class="close">Close</a>
+	        </div>
+        </nav>
+
+        <!-- Wrapper -->
+        <section id="wrapper" style="background-image: url(""); background-size: contain; background-repeat: no-repeat">
+            <header>
+                <div class="inner">
+                    <h2>University Project - Collaboration Project</h2>
+                    <p>Building a Game in Unreal Engine 5 as part of a team consisting of Programmers,
+                    Artists and Designers.</p>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="wrapper">
+                <div class="inner">
+
+                    <!--
+                    <h3 class="major">Gameplay Video</h3>
+                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
+                        <iframe allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                src="https://www.youtube.com/embed/-yteyoy0fSw?rel=0&autoplay=1&mute=1" allow="autoplay">
+                        </iframe>
+                    </div>
+                    <br>
+                    -->
+
+                    <!--Do Write Up Here-->
+<!--
+                    <h3 class="major">Background</h3>
+                    <p>
+                        Initially we were given a basic DX11 Project which created a window and initialized most of the under-lying
+                        DirectX specifics, such as the Render Pipeline.
+                    </p>
+                    <h3 class="major">Starting Out</h3>
+                    <p>
+                        The first thing we were taught was how to navigate the project we were given.
+                        <br>
+                        Afterward we were told how to change the RasterizerState with <code>RSSetState()</code> to use wireframe instead of solid shading.
+                        <br>
+                        At this point I started deviating from the teaching and I implemented a keybind that closed the window on press.
+                        This took advantage of <code>WM_CLOSE</code> message which is passed to the <code>WndProc()</code> function to process the Windows Message.
+                        I realised that this will close the program even when it is not in focus, so I added a check which uses
+                        <code>GetForegroundWindow()</code> and compares it against the <code>HWND</code> of the DX11 window.
+                    </p>
+                    <h3 class="major">Refactoring</h3>
+                    <p>
+                        At this point the project was becoming a bit of a mess, as the code we were given was all in one <code>.cpp</code> file.
+                        This lead to a need to start refactoring much of the code to either be outside the <code>.cpp</code> or into a neater format.
+                        <br><br>
+                        To facility this I created a simple <code>.obj</code> that loads mesh data from a file and using this format, I figured out
+                        what data I can move from the main <code>.cpp</code>.
+                        <br>
+                        A lot of model data that was hardcoded in (a Cube) and the <code>Transform</code>s of objects could be
+                        immediately moved out.
+                    </p>
+                    <h3 class="major">Game or Render Object</h3>
+                    <p>
+                        As of writing this I am currently working on creating a Game or Render Object which handles
+                        each object in the scene.
+                        <br>
+                        Currently a <code>RenderObject</code> contains a <code>Mesh</code> and <code>Transform</code>.
+                        <br>
+                        <h4>Mesh</h4>
+                        A <code>Mesh</code> contains the raw data of the model so that it can be rendered to the scene, such as
+                        Vertices, Vertex Indices, <code>Material</code>, Vertex Buffer and Index Buffer.
+                        <br>
+                        The <code>Material</code> contains the data read in from the <code>.mtl</code> that is referenced in the <code>.obj</code>.
+                        <br><br>
+                        <h4>Transform</h4>
+                        The <code>Transform</code> contains the <code>XMFLOAT4X4</code> which represents the World Matrix of the object.
+                        <br>
+                        It keeps track of the Local Position of the object, which, if the object has no parent, is also the direct
+                        World Position. It also tracks the Scale of the object.
+                        <br>
+                        The <code>Transform</code> also holds a pointer to the <code>RenderObject</code>.
+                    </p>
+-->
+
+                    <!--									<section class="features">-->
+                    <!--										<article>-->
+                    <!--											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>-->
+                    <!--											<h3 class="major">Sed feugiat lorem</h3>-->
+                    <!--											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>-->
+                    <!--											<a href="#" class="special">Learn more</a>-->
+                    <!--										</article>-->
+                    <!--										<article>-->
+                    <!--											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>-->
+                    <!--											<h3 class="major">Nisl placerat</h3>-->
+                    <!--											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>-->
+                    <!--											<a href="#" class="special">Learn more</a>-->
+                    <!--										</article>-->
+                    <!--									</section>-->
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <section id="footer">
+            <div class="inner">
+                <h2 class="major">Details</h2>
+                <ul class="actions">
+                    <li class="icon brands fa-linkedin"> - <a target="_blank" href="https://linkedin.com/in/ethirix">Jack Wright</a></li>
+                    <li class="icon brands fa-github"> - <a target="_blank" href="https://github.com/ethirix">Ethirix</a></li>
+                    <li class="icon brands fa-twitter"> - <a target="_blank" href="https://twitter.com/ethirix">@Ethirix</a></li>
+                </ul>
+                <ul class="copyright">
+                    <li>&copy; Jack Wright - All rights reserved.</li>
+                    <li>Design: <a target="_blank" href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
