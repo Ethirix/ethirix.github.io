@@ -3229,6 +3229,7 @@ input, select, textarea {
 				}
 
 /* XLarge */
+/* XLarge */
 	#align-right-on-correct-size {
 
 	}
@@ -3454,7 +3455,7 @@ input, select, textarea {
 			input[type="reset"],
 			input[type="button"],
 			.button {
-				padding: 0;
+				padding: 0 1em;
 			}
 
 		/* Main */
@@ -3525,3 +3526,36 @@ input, select, textarea {
 			}
 
 	}
+
+
+h1.pageTitle, h2.pageTitle, h3.pageTitle, h4.pageTitle, h5.pageTitle, h6.pageTitle
+{
+	color: white;
+	font-weight: bold;
+	text-shadow: -1px -1px black, 1px -1px black, 1px 1px black, -1px 1px black;
+}
+
+p.pageTagline
+{
+	color: white;
+	font-weight: bolder;
+	text-shadow: -1px -1px black, 1px -1px black, 1px 1px black, -1px 1px black;
+	font-size: 1em;
+}
+
+a.backButton
+{
+	position: fixed; bottom: 1em; left: 1em;
+	background-color: rgba(24, 26, 27, 0.5);
+	box-shadow: inset 0 0 0 1px rgba(168, 160, 149, 0.5);
+}
+
+p.backButton
+{
+	color: rgba(255, 255, 255, 0.5);
+}
+
+h1.centerTitle, h2.centerTitle, h3.centerTitle, h4.centerTitle, h5.centerTitle, h6.centerTitle
+{
+	text-align: center;
+}
