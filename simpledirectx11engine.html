@@ -43,15 +43,38 @@ background-size: cover; background-position: center; background-attachment: loca
             This would require a recompilation of the project each time a value was changed. As well as this, it required
             passing many variables to a factory class that would handle the creation of each object - meaning that each
             object type was explicitly different.
+            <br/>
+            Outside basic rendering and asset management the other extra features added in this iteration was multiple point lights
+            with Blinn-Phong shading and basic scene graph in the background.
+            <img src="images/dx11_rtrf_preview_image.png" alt="DirectX 11 RTRF Preview" style="width: 100%; height: auto; padding: 1em;"/>
             <br/><br/>
-            AMG required adding Physics to a framework - I chose to use my previous project for this - with a fairly basic
-            physic model being implemented - Gravity,
+            AMG required adding Physics to a framework - I chose to use the previous version for this, however much of it was rewritten.
+            <br/>
+            To begin with, a JSON loaded was added that could load assets from a file at runtime - this immediately saves
+            the recompilation required when changing objects in the scene, as well as faster creation of new objects for the engine.
+            <br/>
+            To compliment this loading system, the 'game object' system was changed to be significantly more generic.
+            Each object is now absolutely required to have a TransformComponent, which is hardcoded to a GameObject.
+            With every other Component, such as a LightComponent being added to a List&lt;BaseComponent&gt;.
+            <br/>
+            Each Component has three functions: Update, FixedUpdate and Draw.
+            Whilst a Component isn't required to use any, it allows the component to hook into the primary engine loop.
+            <br/>
+            This version of the engine also uses smart pointers for everything - which was primarily done as a test.
+            However, it allows for better context for some checks required by the engine - for example, the PhysicsComponent
+            needs to check if there is a ColliderComponent present to apply angular velocity to the collider.
+            <br/>
+            For the Physics itself, the physics system handles several different forces: Gravity, Drag, Friction, Angular Momentum,
+            Impulse, Restitution and an additive force system.
+            <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
+                <iframe allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                        src="https://www.youtube.com/embed/k0b1Tr4100A?rel=0" allow="autoplay">
+                </iframe>
+            </div>
             <br/><br/>
-            ARTG deferred here
-            <br/><br/>
-            Extra features here
+            ARTG is an introduction to more-modern rendering techniques, such as deferred rendering. As this module is in progress at the time
+            of writing, there is not much to talk about in regard to the implementation of any of the features required for this module.
         </p>
-
     </div>
 </section>
 
