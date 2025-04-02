@@ -7,94 +7,100 @@
 <html lang="en-gb">
 <head>
     <title>Mech Head - Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.png">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link href="images/favicon.png" rel="icon" type="image/x-icon">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport"/>
+    <link href="assets/css/main.css" rel="stylesheet"/>
+    <noscript>
+        <link href="assets/css/noscript.css" rel="stylesheet"/>
+    </noscript>
 </head>
 <body class="is-preload">
-    <!-- Page Wrapper -->
-    <div id="page-wrapper">
+<!-- Page Wrapper -->
+<div id="page-wrapper">
 
-        <section id="header" style="background-image: url(images/mechhead_header_image.png);
+    <section id="header" style="background-image: url(images/mechhead_header_image.avif);
 background-size: cover; background-position: center; background-attachment: local">
-            <h1 class="pageTitle">University Project: MechHead</h1>
-            <p class="pageTagline">A Mech Shooter with varying enemies, weapons and ammo.</p>
+        <h1 class="pageTitle">University Project: MechHead</h1>
+        <p class="pageTagline">A Mech Shooter with varying enemies, weapons and ammo.</p>
 
-        </section>
+    </section>
 
-        <a href="index.html" class="button backButton">
-            <p class="backButton">BACK</p>
-        </a>
+    <a class="button backButton" href="index.html">
+        <p class="backButton">BACK</p>
+    </a>
 
 
-        <!-- One -->
-        <section id="one" class="main style1" style="padding: 2em 1em 2em 1em">
-            <div class="container" style="text-align: left">
-                <h3 class="major centerTitle">Demonstration Video</h3>
-                <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
-                    <iframe allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                            src="https://www.youtube.com/embed/-yteyoy0fSw?rel=0&autoplay=1&mute=1" allow="autoplay">
-                    </iframe>
-                </div>
-                <br>
-                <h3 class="major centerTitle">Description</h3>
-                <p>
-                    As a Mech Pilot, you're deployed to a terrorist incident in the city.
-                    <br>
-                    Your job as a battle-hardened mech pilot is to defend the city and destroy the terrorists.
-                    <br>
-                    They may be heavily armed so take weapons and resources from the ruins of their mechs.
-                    <br>
-                    Good luck.
-                </p>
-                <h3 class="major centerTitle">Background</h3>
-                <p>
-                    This was a project I was given in the first year of my Games Programming Course at Staffordshire University,
-                    we were tasked with creating a Mech-Shooter from the framework provided - called Mech Head.
-                    <br><br>
-                    This was given to use to teach us how to use Unreal (4) and how Blueprints work. As this was a
-                    Foundation Year project it was used as a way to teach people the "flow" of programming.
-                    <br><br>
-                    The framework given was bare-bones and I had to create my own Weapons and Enemies from the
-                    assets and built-in blueprints provided. I learned very quickly from the base blueprints
-                    and adapted them to suit my needs. Originally, the player could not pick up enemies weapons,
-                    however as a way of both providing the player with different weapons in a diagetic fashion, I
-                    decided to add the functionality.
-                    <br><br>
-                    Enemies also did not drop anything on death - like Ammo or Health, so I added a system that - based on
-                    what the enemies main weapon's ammo type was - dropped the ammo on the ground when the mech gets destroyed.
-                    The system also allowed for me to create my own drops so I could control how much resources
-                    were provided to the player, so I could create a sense of scarcity with ammo while giving the player
-                    enough to get through the level without running out of ammo (unless they waste ammo).
-                    <br><br>
-                    The weapon information popup that is displayed when you hover over a weapon was modified to include
-                    additional data about the weapon, originally only the damage and which arm it was for.
-                    I added data such as rate of fire, ammo cost per shot and ammo type.
-                </p>
+    <!-- One -->
+    <section class="main style1" id="one" style="padding: 2em 1em 2em 1em">
+        <div class="container" style="text-align: left">
+            <h3 class="major centerTitle">Demonstration Video</h3>
+            <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
+                <iframe allow="autoplay" allowfullscreen
+                        src="https://www.youtube.com/embed/-yteyoy0fSw?rel=0&autoplay=1&mute=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                </iframe>
             </div>
-        </section>
-    </div>
+            <br>
+            <h3 class="major centerTitle">Description</h3>
+            <p>
+                As a Mech Pilot, you're deployed to a terrorist incident in the city.
+                <br>
+                Your job as a battle-hardened mech pilot is to defend the city and destroy the terrorists.
+                <br>
+                They may be heavily armed so take weapons and resources from the ruins of their mechs.
+                <br>
+                Good luck.
+            </p>
+            <h3 class="major centerTitle">Background</h3>
+            <p>
+                This was a project I was given in the first year of my Games Programming Course at Staffordshire
+                University,
+                we were tasked with creating a Mech-Shooter from the framework provided - called Mech Head.
+                <br><br>
+                This was given to use to teach us how to use Unreal (4) and how Blueprints work. As this was a
+                Foundation Year project it was used as a way to teach people the "flow" of programming.
+                <br><br>
+                The framework given was bare-bones and I had to create my own Weapons and Enemies from the
+                assets and built-in blueprints provided. I learned very quickly from the base blueprints
+                and adapted them to suit my needs. Originally, the player could not pick up enemies weapons,
+                however as a way of both providing the player with different weapons in a diagetic fashion, I
+                decided to add the functionality.
+                <br><br>
+                Enemies also did not drop anything on death - like Ammo or Health, so I added a system that - based on
+                what the enemies main weapon's ammo type was - dropped the ammo on the ground when the mech gets
+                destroyed.
+                The system also allowed for me to create my own drops so I could control how much resources
+                were provided to the player, so I could create a sense of scarcity with ammo while giving the player
+                enough to get through the level without running out of ammo (unless they waste ammo).
+                <br><br>
+                The weapon information popup that is displayed when you hover over a weapon was modified to include
+                additional data about the weapon, originally only the damage and which arm it was for.
+                I added data such as rate of fire, ammo cost per shot and ammo type.
+            </p>
+        </div>
+    </section>
+</div>
 
-    <!-- Footer -->
-        <section id="footer">
-            <ul class="icons">
-                <li class="icon brands alt fa-linkedin"> - <a target="_blank" href="https://linkedin.com/in/ethirix">Jack Wright</a></li>
-                <li class="icon brands alt fa-github"> - <a target="_blank" href="https://github.com/ethirix">Ethirix</a></li>
-                <li class="icon brands alt fa-twitter"> - <a target="_blank" href="https://twitter.com/ethirix">@Ethirix</a></li>
-            </ul>
-            <ul class="copyright">
-                <li>&copy; Jack Wright - All rights reserved.</li>
-                <li>Design: <a target="_blank" href="https://html5up.net">HTML5 UP</a></li>
-            </ul>
-        </section>
+<!-- Footer -->
+<section id="footer">
+    <ul class="icons">
+        <li class="icon brands alt fa-linkedin"> - <a href="https://linkedin.com/in/ethirix" target="_blank">Jack
+            Wright</a></li>
+        <li class="icon brands alt fa-github"> - <a href="https://github.com/ethirix" target="_blank">Ethirix</a></li>
+        <li class="icon brands alt fa-twitter"> - <a href="https://twitter.com/ethirix" target="_blank">@Ethirix</a>
+        </li>
+    </ul>
+    <ul class="copyright">
+        <li>&copy; Jack Wright - All rights reserved.</li>
+        <li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
+    </ul>
+</section>
 
-        <!-- Scripts -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/jquery.scrolly.min.js"></script>
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/util.js"></script>
-        <script src="assets/js/main.js"></script>
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
