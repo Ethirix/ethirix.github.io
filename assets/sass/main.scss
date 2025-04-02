@@ -4,7 +4,9 @@
 @import 'libs/vendor';
 @import 'libs/breakpoints';
 @import 'libs/html-grid';
-@import url('fontawesome-all.min.css');
+@import url('fontawesome.css');
+@import url('brands.css');
+@import url('solid.css');
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic");
 
 /*
@@ -1138,7 +1140,7 @@ button,
   &.style2 {
     @include dark(#333);
     background-attachment: fixed, fixed;
-    background-image: url('images/overlay1.png'), url('../../images/header.jpg');
+    background-image: url('images/overlay1.png'), url('../../images/header.avif');
     background-size: auto, cover;
   }
 }
