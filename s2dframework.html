@@ -7,79 +7,102 @@
 <html lang="en-gb">
 <head>
     <title>S2D Framework - Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.png">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link href="images/favicon.png" rel="icon" type="image/x-icon">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport"/>
+    <link href="assets/css/main.css" rel="stylesheet"/>
+    <noscript>
+        <link href="assets/css/noscript.css" rel="stylesheet"/>
+    </noscript>
 </head>
 <body class="is-preload">
 
-    <section id="header" style="background-image: url(images/s2d_framework_header_image.png);
+<section id="header" style="background-image: url(images/s2d_framework_header_image.avif);
     background-size: cover; background-position: center; background-attachment: local">
-        <h1 class="pageTitle">University Project: S2D Framework</h1>
-        <p class="pageTagline">A pixel corridor shooter built upon a minimal OpenGL 2D Framework.</p>
+    <h1 class="pageTitle">University Project: S2D Framework</h1>
+    <p class="pageTagline">A pixel corridor shooter built upon a minimal OpenGL 2D Framework.</p>
 
-    </section>
+</section>
 
-    <a href="index.html" class="button backButton">
-        <p class="backButton">BACK</p>
-    </a>
+<a class="button backButton" href="index.html">
+    <p class="backButton">BACK</p>
+</a>
 
 
-    <!-- One -->
-    <section id="one" class="main style1" style="padding: 2em 1em 2em 1em">
-        <div class="container" style="text-align: left">
-            <h3 class="major centerTitle">Demonstration Video</h3>
-            <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
-                <iframe allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                        src="https://www.youtube.com/embed/MqGDviF2MzA?rel=0&autoplay=1&mute=1" allow="autoplay">
-                </iframe>
-            </div>
-            <br>
-
-            <h3 class="major centerTitle">Background</h3>
-            <article>
-                <p>
-                    As part of the Fundamentals of Game and Graphical Systems Development (FOGGS) Module at Level 4, we had to create a game using an OpenGL Wrapper Framework provided by university.
-                    <br/>
-                    It's intended for us to learn at a basic level how to program using a Graphical API in C++.
-                    <br/>
-                    As someone who has done some work in Unity, I decided to sort of "recreate" some features of Unity, such as the Update() function.
-                    This allows me to facilitate a (somewhat) familiar environment.
-                    <br/>
-                    I spent quite a lot of time working on features that would speed up development time of actual gameplay. Such as:
-                </p>
-                <ul>
-                    <li>A Texture Manager that gets the file names of all textures in a file and converts it to a key, so that you do not need to remember the file location - also is caps independent. Caveat however, if multiple files have the same name it the last loaded will be the only one loaded.</li>
-                    <li>A Render Queue that determines the order of rendering. Objects with a value of 0 will be rendered first -or below- those of higher values. The order of rendering for same value objects is determined by their position in the Queue</li>
-                    <li>Collisions - the collision system works somewhat similarly to Unity, when two objects touch, both will run any code either object has for collisions. On top of this, an object can be a Trigger, so that it doesn't block movement but can still run Collision Code</li>
-                    <li>Safe Object Deletion - when an object is to be removed from the Game it is first added to a queue that is cleared at the end of every frame. This is to avoid any code that has reference to the object from attempting to run when the memory has been freed.</li>
-                    <li>Time-based Animations - the frame time is used to calculate animations, for example an animation that updates 4 times a second needs to wait 250ms before it can be changed, the time between frames is added to a counter that when the counter goes equal to, or above the time requirement, will update the animation.</li>
-                </ul>
-            </article>
+<!-- One -->
+<section class="main style1" id="one" style="padding: 2em 1em 2em 1em">
+    <div class="container" style="text-align: left">
+        <h3 class="major centerTitle">Demonstration Video</h3>
+        <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">
+            <iframe allow="autoplay" allowfullscreen
+                    src="https://www.youtube.com/embed/MqGDviF2MzA?rel=0&autoplay=1&mute=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            </iframe>
         </div>
-    </section>
+        <br>
 
-    <!-- Footer -->
-    <section id="footer">
-        <ul class="icons">
-            <li class="icon brands alt fa-linkedin"> - <a target="_blank" href="https://linkedin.com/in/ethirix">Jack Wright</a></li>
-            <li class="icon brands alt fa-github"> - <a target="_blank" href="https://github.com/ethirix">Ethirix</a></li>
-            <li class="icon brands alt fa-twitter"> - <a target="_blank" href="https://twitter.com/ethirix">@Ethirix</a></li>
-        </ul>
-        <ul class="copyright">
-            <li>&copy; Jack Wright - All rights reserved.</li>
-            <li>Design: <a target="_blank" href="https://html5up.net">HTML5 UP</a></li>
-        </ul>
-    </section>
+        <h3 class="major centerTitle">Background</h3>
+        <article>
+            <p>
+                As part of the Fundamentals of Game and Graphical Systems Development (FOGGS) Module at Level 4, we had
+                to create a game using an OpenGL Wrapper Framework provided by university.
+                <br/>
+                It's intended for us to learn at a basic level how to program using a Graphical API in C++.
+                <br/>
+                As someone who has done some work in Unity, I decided to sort of "recreate" some features of Unity, such
+                as the Update() function.
+                This allows me to facilitate a (somewhat) familiar environment.
+                <br/>
+                I spent quite a lot of time working on features that would speed up development time of actual gameplay.
+                Such as:
+            </p>
+            <ul>
+                <li>A Texture Manager that gets the file names of all textures in a file and converts it to a key, so
+                    that you do not need to remember the file location - also is caps independent. Caveat however, if
+                    multiple files have the same name it the last loaded will be the only one loaded.
+                </li>
+                <li>A Render Queue that determines the order of rendering. Objects with a value of 0 will be rendered
+                    first -or below- those of higher values. The order of rendering for same value objects is determined
+                    by their position in the Queue
+                </li>
+                <li>Collisions - the collision system works somewhat similarly to Unity, when two objects touch, both
+                    will run any code either object has for collisions. On top of this, an object can be a Trigger, so
+                    that it doesn't block movement but can still run Collision Code
+                </li>
+                <li>Safe Object Deletion - when an object is to be removed from the Game it is first added to a queue
+                    that is cleared at the end of every frame. This is to avoid any code that has reference to the
+                    object from attempting to run when the memory has been freed.
+                </li>
+                <li>Time-based Animations - the frame time is used to calculate animations, for example an animation
+                    that updates 4 times a second needs to wait 250ms before it can be changed, the time between frames
+                    is added to a counter that when the counter goes equal to, or above the time requirement, will
+                    update the animation.
+                </li>
+            </ul>
+        </article>
+    </div>
+</section>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+<!-- Footer -->
+<section id="footer">
+    <ul class="icons">
+        <li class="icon brands alt fa-linkedin"> - <a href="https://linkedin.com/in/ethirix" target="_blank">Jack
+            Wright</a></li>
+        <li class="icon brands alt fa-github"> - <a href="https://github.com/ethirix" target="_blank">Ethirix</a></li>
+        <li class="icon brands alt fa-twitter"> - <a href="https://twitter.com/ethirix" target="_blank">@Ethirix</a>
+        </li>
+    </ul>
+    <ul class="copyright">
+        <li>&copy; Jack Wright - All rights reserved.</li>
+        <li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
+    </ul>
+</section>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 
 </body>
