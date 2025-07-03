@@ -6,7 +6,7 @@
 -->
 <html lang="en_GB">
 <head>
-    <title>Simple DirectX 11 Engine - Portfolio</title>
+    <title>Cross-platform Engine Development - Portfolio</title>
     <link href="../images/favicon.png" rel="icon" type="image/x-icon">
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport"/>
@@ -18,7 +18,6 @@
 <body class="is-preload">
 
 <!-- Header -->
-<!--    TEMPORARY IMAGE     -->
 <section id="header" style="background-image: url(../images/cped_header.avif);
     background-size: cover; background-position: center; background-attachment: local">
     <h1 class="pageTitle">Collaborative Project: Cross-platform Engine Development</h1>
@@ -31,6 +30,101 @@
 
 <!-- One -->
 <section class="main style1" id="one" style="padding: 2em 1em 2em 1em">
+    <div class="container" style="text-align: left">
+        <h2 class="major centerTitle">Background</h2>
+        <p>
+            <!--<h3 class="major centerTitle">Demonstration Video</h3>-->
+            <!--<div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">-->
+            <!--    <iframe allow="autoplay" allowfullscreen-->
+            <!--          src="https://www.youtube.com/embed/" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">-->
+            <!--    </iframe>-->
+            <!--</div>-->
+        </p>
+        <h3 class="major centerTitle">Maths Library</h3>
+        <p>
+            A Maths Library is a critical feature of a cross-platform engine as many core features will rely on the functions and structs that are present within.
+            I designed how the Maths Library works as well as added some of the functionality.
+            <br/><br/>
+            The functionality I added was Vector2, Vector3 and Vector4 classes. These each overloaded the +, -, *, /, +=, -=, *=, /=, == and != operators.
+            As well as this, each class also contained functions, as well as static functions, to calculate dot, angle, magnitude, magnitude squared and vector normalized.
+            <br/>
+            Each one also contained static initializers for One and Zero, returning vectors that are prefilled with values. Vector2 and Vector3 also contain Up, Down,
+            Left and Right initializers with Vector3 also containing Forward and Back - contextually indicating that Vector2 and Vector3 are used for 2D and 3D coordinate spaces.
+            <br/><br/>
+            Functions to calculate orthogonal projection and look-to view matrices were also added, although, many of the values that would be used were not, as the engine is
+            specifically targeting 2D rendering.
+        </p>
+        <h3 class="major centerTitle">Renderer - DirectX 11</h3>
+        <p>
+            The DirectX 11 Renderer is the primary renderer of the project. With a different renderer having to be used for the PlayStation 5 Port of the Project.
+        </p>
+
+        <!--forum posts
+        I was also tasked with implementing the DirectX 11 Renderer.
+        Some work was completed on the renderer, with most of the work coming from reasoning how a renderer interface will function,
+        in regard to being able to use multiple renderers. The solution to this is compile-time linking of the correct renderer for the platform being deployed to,
+        with the header file being the interface for the renderer, then the CPP file containing the implementation with using anonymous namespace to
+        utilise private data without attempting to conform various and potentially incompatible ideas through the interface.
+
+        Whilst trying to figure out the solution to this, I had created a 'replacement' for the Microsoft supplied ComPtr, using std::unique_ptr,
+        concepts and a custom deleter - however this turned out to be useless and was removed.
+
+        A majority of the initialisation for the DirectX 11 renderer was completed this week.
+        The primary reason for using DirectX 11 for the Windows platform renderer was the speed at which DirectX 11 can be initialized and also,
+        as the graphics programmer, my knowledge of DirectX 11.
+
+        The main blocker for fully completing the renderer is the camera orthogonal projection and view calculations, which leads on to the maths library additions.
+
+        This week I finalised the most basic DirectX 11 Renderer - with support for transforms when that becomes available.
+        At this point in time there is not a component system or something to that effect to allow somewhere to dispatch data for the renderer from -
+        so at this point a singular quad is being rendered to the screen.
+
+        As well as this, the quad vertex and index data is being loaded from the CPU instead of hard coded into the shader -
+        it was not clear at this point whether the renderer would be able to render anything beyond quads or not - this is likely to change in the future.
+        The first task for the renderer too was converting the Windows portion to its own CPP implementation, like that of the Logger.
+        This one was a lot more involved as previously many member variables had to become part of the internal linkage in an anonymous namespace,
+        and since most of it was being moved a lot of refactoring that could occur did not.
+        Some other helpers were added that may help with platform independence from the interface, such as Result which returns a long and a string -
+        which would be incompatible with DirectX's HRESULT - which is just a long value, but typedef'd.
+
+        This is also the point in which the renderer was swapped back to 'normal' coordinate space, with X and Y, which was a fairly simple change within the matrix calculations.
+        As well as this the renderer camera supports resizing. Due to how orthogonal projection works, the 'size' of a projection is 1:1 with world space coordinates,
+        such that a size of 4x4 (assuming a square resolution) the corners will map to the world space coordinates of -4->4 in both X and Y, when the camera is at origin.
+        With this being the case, I made the renderer camera not have any specific dominant axis - if the screen is wider than tall,
+        the target zoom factor will be pinned to the height - the opposite when the height is bigger.
+        This week a very simple and temporary sprite renderer was added to the renderer.
+        The implementation was not concrete in any way and is meant to be temporary for the formative review -
+        it breaks the logic of the program, with the renderer directly consuming the scene graph and knowing what a sprite renderer component is.
+        When the component system is fully online then work can begin to move this into the component itself and have some way of having the sprite renderer component
+        to register a draw call with the renderer.
+
+        As previously mentioned, the renderer holds a lot of code that should be refactored when the time arrives -
+        such as after last week when the Component system was solidified.
+        To achieve renderer independence from other systems, the renderer is passed by reference through the on_draw() function so that the added functions can be used.
+        Since this is a 2D engine and is designed to only render quads - there is a render_sprite() function on the renderer. Across this you pass the texture Id,
+        the position, flipped state and colour. The Texture Id is set up by passing a void* to the texture data, the textures Id assigned by the image loader, width and height.
+        This is enough data to create the resource on the renderer implementation - such as with DirectX - a ShaderResourceView.
+        At this point too, the DirectX renderer was changed to only be able to render Quads through the shader, using the VertexID semantic to fetch the required data built
+        into the shader - this reduces the need to bind to the DirectX 11 pipeline. Texture Flipping was also moved to the shader as previously it was built into the world matrix,
+        which would require the SpriteRendererComponent to be able to decompose the world matrix and rebuild it - just to change the effective scale of the sprite.
+        Instead, this is passed to the shader that instead flips the texture coordinates.
+
+        During this week, whilst implementing lighting, I cleaned up many DirectX specific resources into containers that allow easy encapsulation of common behaviors -
+        such as mapping buffers to the GPU. Or, functionality not intrinsic to the Resource - such as resizing them; DirectX requires that resources must be deleted
+        and rebuilt to 'resize' them. This specific functionality is required to allow for an unlimited amount of lights - with a resize of 2(n).
+        This keeps the buffer small to begin with whilst allowing it to grow if a large amount of lights is required.
+        With more time this feature would have turned into a more robust system, as each implementation of 'wrapper' is independent and thrown together -
+        such as the Texture2DResource which holds a Texture2D, RenderTargetView and ShaderResourceView, but also there is the SRVResource independent
+        of the ShaderResourceView within the Texture2DResource.
+
+        Also, this week, a small update to how Sprites are rendered - with layers.
+        Whilst previously objects were rendered in whatever order they reached the renderer and there is no depth buffer bound in either renderer as
+        there is no massively complicated geometry, or real need for the GPU to perform a depth test.
+        Final task for the renderer is adding a 'late' render, which allows the cursor to render on top of all objects on screen and also not be affected by the lighting system.
+        -->
+
+
+
     <!--    <div class="container" style="text-align: left">-->
     <!--        <h3 class="major centerTitle">Demonstration Video</h3>-->
     <!--        <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">-->
@@ -91,6 +185,7 @@
     <!--            The <code>Transform</code> also holds a pointer to the <code>RenderObject</code>.-->
     <!--        </p>-->
     <!--    </div>-->
+    </div>
 </section>
 
 <!-- Footer -->
