@@ -39,7 +39,11 @@
             <!--          src="https://www.youtube.com/embed/" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">-->
             <!--    </iframe>-->
             <!--</div>-->
+
+            WRITE HERE ABOUT THE MAJOR FEATURES OF THE PROJECT I WORKED ON AND HOW THEY WORK!!
         </p>
+
+        <h2 class="major centerTitle">Specifics of Features Implemented</h2>
         <h3 class="major centerTitle">Maths Library</h3>
         <p>
             A Maths Library is a critical feature of a cross-platform engine as many core features will rely on the functions and structs that are present within.
@@ -56,36 +60,42 @@
         </p>
         <h3 class="major centerTitle">Renderer - DirectX 11</h3>
         <p>
-            The DirectX 11 Renderer is the primary renderer of the project. With a different renderer having to be used for the PlayStation 5 Port of the Project.
+            The DirectX 11 Renderer is the primary renderer of the project, with a different renderer having to be used for the PlayStation 5 Port of the Project.
+            <br/><br/>
+            The Renderers were implemented are in a way that means a specifical renderer could be conditionally compiled for the platform. The header file for the renderer
+            acts as an interface for each renderer. Then, the implementation is linked at compile time - through selecting the implementation file.
+            <br/><br/>
+            As the project is 2D and sprite-based, the renderer interface was specialised to simply being able to call renderer::draw_sprite() which then
+            is processed by the renderer itself, breaking down the tasks required to draw a sprite - such as binding data to shaders and dispatching draw calls.
+            <br/>
+            Around this, the renderer also has some extra functions that facilitate more of the renderer functionality. These are de/register_texture(),
+            register_point/directional_light(), draw_sprite_late() and set_render_camera().
+            <br/>
+            Registering and deregistering a texture involves utilising the global unique identifier given to each texture fetched by the asset pipeline and
+            passing this, along with a void* and texture resolution to the renderer to create a renderer specific resource. For example, in DirectX 11,
+            textures need to be bound to a ID3D11ShaderResourceView, whereas this may not be the same in another renderer API. This is then, within the DirectX 11 renderer,
+            inserted into a std::map of identifier and SRV.
+            <br/>
+            Registering point or directional lights passes the data required for each light to be rendered that frame.
+            <br/>
+            Drawing a sprite late draws a sprite after the rest of the rendering has taken place. This is used to render the cursor correctly, on top of all things on the screen.
+            <br/>
+            Finally, setting the render camera sets which camera should be used to render the scene. A quirk of this is that if there are multiple cameras, and more than one is
+            active, the last camera called will be the one that is rendered with.
+            <br/><br/>
+            To facilitate much of the previously discussed engine features, wrappers around DirectX 11 datatypes were created.
+            <br/>
+            For example, SRVResource was created to wrap data management for a ID3D11ShaderResourceView. This provides a few helper functions to manage a ID3D11ShaderResourceView.
+            Lighting can have many lights passed to the renderer, SRVResource can be used to resize the ID3D11ShaderResourceView at a rate of 2(n), as well as mapping to the GPU.
+            <br/>
+            Others include BufferResource for ID3D11Buffer and Texture2DResource for ID3D11Texture2D, ID3D11RenderTargetView and ID3D11ShaderResourceView.
         </p>
 
         <!--forum posts
-        I was also tasked with implementing the DirectX 11 Renderer.
-        Some work was completed on the renderer, with most of the work coming from reasoning how a renderer interface will function,
-        in regard to being able to use multiple renderers. The solution to this is compile-time linking of the correct renderer for the platform being deployed to,
-        with the header file being the interface for the renderer, then the CPP file containing the implementation with using anonymous namespace to
-        utilise private data without attempting to conform various and potentially incompatible ideas through the interface.
-
-        Whilst trying to figure out the solution to this, I had created a 'replacement' for the Microsoft supplied ComPtr, using std::unique_ptr,
-        concepts and a custom deleter - however this turned out to be useless and was removed.
-
         A majority of the initialisation for the DirectX 11 renderer was completed this week.
         The primary reason for using DirectX 11 for the Windows platform renderer was the speed at which DirectX 11 can be initialized and also,
         as the graphics programmer, my knowledge of DirectX 11.
 
-        The main blocker for fully completing the renderer is the camera orthogonal projection and view calculations, which leads on to the maths library additions.
-
-        This week I finalised the most basic DirectX 11 Renderer - with support for transforms when that becomes available.
-        At this point in time there is not a component system or something to that effect to allow somewhere to dispatch data for the renderer from -
-        so at this point a singular quad is being rendered to the screen.
-
-        As well as this, the quad vertex and index data is being loaded from the CPU instead of hard coded into the shader -
-        it was not clear at this point whether the renderer would be able to render anything beyond quads or not - this is likely to change in the future.
-        The first task for the renderer too was converting the Windows portion to its own CPP implementation, like that of the Logger.
-        This one was a lot more involved as previously many member variables had to become part of the internal linkage in an anonymous namespace,
-        and since most of it was being moved a lot of refactoring that could occur did not.
-        Some other helpers were added that may help with platform independence from the interface, such as Result which returns a long and a string -
-        which would be incompatible with DirectX's HRESULT - which is just a long value, but typedef'd.
 
         This is also the point in which the renderer was swapped back to 'normal' coordinate space, with X and Y, which was a fairly simple change within the matrix calculations.
         As well as this the renderer camera supports resizing. Due to how orthogonal projection works, the 'size' of a projection is 1:1 with world space coordinates,
@@ -122,69 +132,6 @@
         there is no massively complicated geometry, or real need for the GPU to perform a depth test.
         Final task for the renderer is adding a 'late' render, which allows the cursor to render on top of all objects on screen and also not be affected by the lighting system.
         -->
-
-
-
-    <!--    <div class="container" style="text-align: left">-->
-    <!--        <h3 class="major centerTitle">Demonstration Video</h3>-->
-    <!--        <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">-->
-    <!--            <iframe allow="autoplay" allowfullscreen-->
-    <!--                  src="https://www.youtube.com/embed/" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">-->
-    <!--            </iframe>-->
-    <!--        </div>-->
-    <!--        <h3 class="major centerTitle">Background</h3>-->
-    <!--        <p>-->
-    <!--            Initially we were given a basic DX11 Project which created a window and initialized most of the under-lying-->
-    <!--            DirectX specifics, such as the Render Pipeline.-->
-    <!--        </p>-->
-    <!--        <h3 class="major centerTitle">Starting Out</h3>-->
-    <!--        <p>-->
-    <!--            The first thing we were taught was how to navigate the project we were given.-->
-    <!--            <br>-->
-    <!--            Afterward we were told how to change the RasterizerState with <code>RSSetState()</code> to use wireframe instead of solid shading.-->
-    <!--            <br>-->
-    <!--            At this point I started deviating from the teaching and I implemented a keybind that closed the window on press.-->
-    <!--            This took advantage of <code>WM_CLOSE</code> message which is passed to the <code>WndProc()</code> function to process the Windows Message.-->
-    <!--            I realised that this will close the program even when it is not in focus, so I added a check which uses-->
-    <!--            <code>GetForegroundWindow()</code> and compares it against the <code>HWND</code> of the DX11 window.-->
-    <!--        </p>-->
-    <!--        <h3 class="major centerTitle">Refactoring</h3>-->
-    <!--        <p>-->
-    <!--            At this point the project was becoming a bit of a mess, as the code we were given was all in one <code>.cpp</code> file.-->
-    <!--            This lead to a need to start refactoring much of the code to either be outside the <code>.cpp</code> or into a neater format.-->
-    <!--            <br><br>-->
-    <!--            To facility this I created a simple <code>.obj</code> that loads mesh data from a file and using this format, I figured out-->
-    <!--            what data I can move from the main <code>.cpp</code>.-->
-    <!--            <br>-->
-    <!--            A lot of model data that was hardcoded in (a Cube) and the <code>Transform</code>s of objects could be-->
-    <!--            immediately moved out.-->
-    <!--        </p>-->
-    <!--        <h3 class="major centerTitle">Render Object</h3>-->
-    <!--        <p>-->
-    <!--            As of writing this I am currently working on creating a Game or Render Object which handles-->
-    <!--            each object in the scene.-->
-    <!--            <br>-->
-    <!--            Currently a <code>RenderObject</code> contains a <code>Mesh</code> and <code>Transform</code>.-->
-    <!--            <br>-->
-    <!--        </p>-->
-    <!--        <h4 class="major centerTitle">Mesh</h4>-->
-    <!--        <p>-->
-    <!--            A <code>Mesh</code> contains the raw data of the model so that it can be rendered to the scene, such as-->
-    <!--            Vertices, Vertex Indices, <code>Material</code>, Vertex Buffer and Index Buffer.-->
-    <!--            <br>-->
-    <!--            The <code>Material</code> contains the data read in from the <code>.mtl</code> that is referenced in the <code>.obj</code>.-->
-    <!--            <br><br>-->
-    <!--        </p>-->
-    <!--        <h4 class="major centerTitle">Transform</h4>-->
-    <!--        <p>-->
-    <!--            The <code>Transform</code> contains the <code>XMFLOAT4X4</code> which represents the World Matrix of the object.-->
-    <!--            <br>-->
-    <!--            It keeps track of the Local Position of the object, which, if the object has no parent, is also the direct-->
-    <!--            World Position. It also tracks the Scale of the object.-->
-    <!--            <br>-->
-    <!--            The <code>Transform</code> also holds a pointer to the <code>RenderObject</code>.-->
-    <!--        </p>-->
-    <!--    </div>-->
     </div>
 </section>
 
