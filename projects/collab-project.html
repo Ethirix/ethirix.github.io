@@ -32,15 +32,24 @@
 <section class="main style1" id="one" style="padding: 2em 1em 2em 1em">
     <div class="container" style="text-align: left">
         <h2 class="major centerTitle">Background</h2>
+<!--        <h3 class="major centerTitle">Demonstration Video</h3>-->
+<!--        <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">-->
+<!--            <iframe allow="autoplay" allowfullscreen-->
+<!--                  src="https://www.youtube.com/embed/" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">-->
+<!--            </iframe>-->
+<!--        </div>-->
         <p>
-            <!--<h3 class="major centerTitle">Demonstration Video</h3>-->
-            <!--<div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">-->
-            <!--    <iframe allow="autoplay" allowfullscreen-->
-            <!--          src="https://www.youtube.com/embed/" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">-->
-            <!--    </iframe>-->
-            <!--</div>-->
-
-            WRITE HERE ABOUT THE MAJOR FEATURES OF THE PROJECT I WORKED ON AND HOW THEY WORK!!
+            This project was created across eight weeks in a team of nine - each with their own tasks to build out the cross-platform engine.
+            <br/><br/>
+            My tasks were primarily focused in the overall architecture of the engine - determining how the Scene Graph, Game Object and Component systems worked.
+            As well as this, I also developed the Windows platform DirectX 11 renderer and worked on some parts of the Maths Library.
+            <br/><br/>
+            The project overall is capable of compiling to Windows and PlayStation 5 with Windows containing a platform-specific feature of Lighting - purely to demonstrate there
+            can be differences.
+            As well as this, the Component facilitates expanding the engine to do, functionally, whatever a developer requires. This allows the project to support such features as Physics,
+            Pathfinding and Task-based AI.
+            <br/><br/>
+            Below is an explanation of the features I worked on and how they function.
         </p>
 
         <h2 class="major centerTitle">Specifics of Features Implemented</h2>
@@ -89,6 +98,18 @@
             Lighting can have many lights passed to the renderer, SRVResource can be used to resize the ID3D11ShaderResourceView at a rate of 2(n), as well as mapping to the GPU.
             <br/>
             Others include BufferResource for ID3D11Buffer and Texture2DResource for ID3D11Texture2D, ID3D11RenderTargetView and ID3D11ShaderResourceView.
+        </p>
+
+        <h3 class="major centerTitle">Scene Graph, Game Object and Component System</h3>
+        <p>
+            The Scene Graph, Game Object and Component system are heavily connected, with the Scene Graph containing Game Objects which contain Components.
+            The Scene Graph is responsible for the correct creation and destruction of Game Objects as well as querying the Scene for Game Objects.
+            <br/>
+            Game Objects are a critical feature as they contain Components, which provide functionality to the whole engine.
+            Game Objects use perfect forwarding to perform in-place construction of Components on the Game Object itself. This avoids creating and copying Components
+            and tethers a Component to a GameObject concretely. As well as this, the Game Object is responsible for determining the functionality required by the Component.
+            Components can have several func
+
         </p>
 
         <!--forum posts
