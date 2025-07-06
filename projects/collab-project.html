@@ -76,6 +76,10 @@
             <br/><br/>
             As the project is 2D and sprite-based, the renderer interface was specialised to simply being able to call renderer::draw_sprite() which then
             is processed by the renderer itself, breaking down the tasks required to draw a sprite - such as binding data to shaders and dispatching draw calls.
+            There is a layer system within the renderer, that allows you to determine in what order, from zero, the order in which sprites are rendered. This allows skipping a depth
+            texture and query to see if something can render. As quads are very cheap to render, this speeds up the renderer over using a Z-test. Whilst this may have several overlapping renders
+            the quads are rendered in full bright, as explored later in the lighting explanation - making the pixel shader cost virtually a texture lookup.
+            Furthermore, the sprite renderer supports flipping, tinting and scaling and UVs for sprite-map lookup.
             <br/>
             Around this, the renderer also has some extra functions that facilitate more of the renderer functionality. These are de/register_texture(),
             register_point/directional_light(), draw_sprite_late() and set_render_camera().
@@ -85,7 +89,9 @@
             textures need to be bound to a ID3D11ShaderResourceView, whereas this may not be the same in another renderer API. This is then, within the DirectX 11 renderer,
             inserted into a std::map of identifier and SRV.
             <br/>
-            Registering point or directional lights passes the data required for each light to be rendered that frame.
+            Registering point or directional lights passes the data required for each light to be rendered that frame - this is then handled in a separate shader pass.
+            By default, the scene is rendered in full bright, and in the Windows version, an extra render-pass occurs, calculating the lighting and then being combined with the full bright
+            output.
             <br/>
             Drawing a sprite late draws a sprite after the rest of the rendering has taken place. This is used to render the cursor correctly, on top of all things on the screen.
             <br/>
@@ -112,46 +118,32 @@
 
         </p>
 
+
         <!--forum posts
-        A majority of the initialisation for the DirectX 11 renderer was completed this week.
-        The primary reason for using DirectX 11 for the Windows platform renderer was the speed at which DirectX 11 can be initialized and also,
-        as the graphics programmer, my knowledge of DirectX 11.
+        To bring the these systems up to scratch, I updated the SceneGraph to be the only thing to be able to create GameObjects and GameObjects to create Components.
+        To achieve this, GameObject friends SceneGraph - this way the constructor for a GameObject can be private so that a GameObject can only physically exist within a scene.
+        Components, before the refactor, already required that a GameObject* is passed in their constructor to BaseComponent,
+        however I took the construction of Components to be in-place on a GameObject - using the same idea as that of the TileMapComponent - where perfect forwarding is used.
+        This combined with C++20's Concepts means that I can enforce compile-time checks to GameObject::add_component<type>(args)
+        to ensure that the Component is constructable and has a GameObject* in the first argument of any constructor.
+        This combined with the SceneGraph change, where you must do SceneGraph::add_game_object() to create a new GameObject,
+        creates a strict but highly dynamic system to add new things to the game.
 
+        On top of all of this, the event system was added to the components, so that on_begin(), on_update(), on_fixed_update(), on_draw(), on_remove()
+        and maybe some collision based ones could be integrated. This also uses C++20 concepts, using std::same_as with a constexpr if statement to determine if the functions exist.
+        If they do an event is registered on the GameObject with a self-event deregistration. This way there is no v-table lookup and only Components that need an event use it,
+        instead of potentially thousands of components all calling empty functions - if they do not get compiler-optimized away.
 
-        This is also the point in which the renderer was swapped back to 'normal' coordinate space, with X and Y, which was a fairly simple change within the matrix calculations.
-        As well as this the renderer camera supports resizing. Due to how orthogonal projection works, the 'size' of a projection is 1:1 with world space coordinates,
-        such that a size of 4x4 (assuming a square resolution) the corners will map to the world space coordinates of -4->4 in both X and Y, when the camera is at origin.
-        With this being the case, I made the renderer camera not have any specific dominant axis - if the screen is wider than tall,
-        the target zoom factor will be pinned to the height - the opposite when the height is bigger.
-        This week a very simple and temporary sprite renderer was added to the renderer.
-        The implementation was not concrete in any way and is meant to be temporary for the formative review -
-        it breaks the logic of the program, with the renderer directly consuming the scene graph and knowing what a sprite renderer component is.
-        When the component system is fully online then work can begin to move this into the component itself and have some way of having the sprite renderer component
-        to register a draw call with the renderer.
+         Based on work from the Renderer and Sprite Renderer Component, a Tile Map Component that can hold any other component was added.
+         The Tile Map Component could construct any component without the need for custom constructors through the use of perfect forwarding with templates and std::forward().
+         This means that Tile Map Component is fully independent to the implementations of each component and would forward any events from the Scene when implemented to them.
+         In essence, becomes a wrapper for a scene, in-and-of-itself.
 
-        As previously mentioned, the renderer holds a lot of code that should be refactored when the time arrives -
-        such as after last week when the Component system was solidified.
-        To achieve renderer independence from other systems, the renderer is passed by reference through the on_draw() function so that the added functions can be used.
-        Since this is a 2D engine and is designed to only render quads - there is a render_sprite() function on the renderer. Across this you pass the texture Id,
-        the position, flipped state and colour. The Texture Id is set up by passing a void* to the texture data, the textures Id assigned by the image loader, width and height.
-        This is enough data to create the resource on the renderer implementation - such as with DirectX - a ShaderResourceView.
-        At this point too, the DirectX renderer was changed to only be able to render Quads through the shader, using the VertexID semantic to fetch the required data built
-        into the shader - this reduces the need to bind to the DirectX 11 pipeline. Texture Flipping was also moved to the shader as previously it was built into the world matrix,
-        which would require the SpriteRendererComponent to be able to decompose the world matrix and rebuild it - just to change the effective scale of the sprite.
-        Instead, this is passed to the shader that instead flips the texture coordinates.
-
-        During this week, whilst implementing lighting, I cleaned up many DirectX specific resources into containers that allow easy encapsulation of common behaviors -
-        such as mapping buffers to the GPU. Or, functionality not intrinsic to the Resource - such as resizing them; DirectX requires that resources must be deleted
-        and rebuilt to 'resize' them. This specific functionality is required to allow for an unlimited amount of lights - with a resize of 2(n).
-        This keeps the buffer small to begin with whilst allowing it to grow if a large amount of lights is required.
-        With more time this feature would have turned into a more robust system, as each implementation of 'wrapper' is independent and thrown together -
-        such as the Texture2DResource which holds a Texture2D, RenderTargetView and ShaderResourceView, but also there is the SRVResource independent
-        of the ShaderResourceView within the Texture2DResource.
-
-        Also, this week, a small update to how Sprites are rendered - with layers.
-        Whilst previously objects were rendered in whatever order they reached the renderer and there is no depth buffer bound in either renderer as
-        there is no massively complicated geometry, or real need for the GPU to perform a depth test.
-        Final task for the renderer is adding a 'late' render, which allows the cursor to render on top of all objects on screen and also not be affected by the lighting system.
+         First thing first this week was implemented a dedicated Camera Component as previously the cameras matrices were hard coded to the renderers.
+         This mainly involved moving the data to its own component and hooking in the on_draw function but the renderer interface needed a way to pass in this data.
+         This was added through the use of Renderer::set_render_camera() which takes a position and the view-projection matrix (pre multiplied).
+         There are a few potential graphical issues that can arise when no Camera is set, one being a camera locked to the world origin and the aspect ratio stretched,
+         the other being the entire render pipeline being black.
         -->
     </div>
 </section>
