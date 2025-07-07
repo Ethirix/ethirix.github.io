@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<!--
+	Photon by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en_GB">
+<head>
+    <title>Cross-platform Engine Development - Portfolio</title>
+    <link href="../images/favicon.png" rel="icon" type="image/x-icon">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport"/>
+    <link href="../assets/css/main.css" rel="stylesheet"/>
+    <noscript>
+        <link href="../assets/css/main.css" rel="stylesheet"/>
+    </noscript>
+</head>
+<body class="is-preload">
+
+<!-- Header -->
+<section id="header" style="background-image: url(../images/cped_header.avif);
+    background-size: cover; background-position: center; background-attachment: local">
+    <h1 class="pageTitle">Collaborative Project: Cross-platform Engine Development</h1>
+    <p class="pageTagline">Building a cross-platform game engine in a team of nine in eight weeks.</p>
+</section>
+
+<a class="button backButton" href="../index.html">
+    <p class="backButton">BACK</p>
+</a>
+
+<!-- One -->
+<section class="main style1" id="one" style="padding: 2em 1em 2em 1em">
+    <div class="container" style="text-align: left">
+        <h2 class="major centerTitle">Background</h2>
+<!--        <h3 class="major centerTitle">Demonstration Video</h3>-->
+<!--        <div style="position: relative; width: 100%; height: 0; padding-bottom: 41.8604651163%">-->
+<!--            <iframe allow="autoplay" allowfullscreen-->
+<!--                  src="https://www.youtube.com/embed/" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">-->
+<!--            </iframe>-->
+<!--        </div>-->
+        <p>
+            This project was created across eight weeks in a team of nine - each with their own tasks to build out the cross-platform engine.
+            <br/><br/>
+            My tasks were primarily focused in the overall architecture of the engine - determining how the Scene Graph, Game Object and Component systems worked.
+            As well as this, I also developed the Windows platform DirectX 11 renderer and worked on some parts of the Maths Library.
+            <br/><br/>
+            The project overall is capable of compiling to Windows and PlayStation 5 with Windows containing a platform-specific feature of Lighting - purely to demonstrate there
+            can be differences.
+            As well as this, the Component facilitates expanding the engine to do, functionally, whatever a developer requires. This allows the project to support such features as Physics,
+            Pathfinding and Task-based AI.
+            <br/><br/>
+            Below is an explanation of the features I worked on and how they function.
+        </p>
+
+        <h2 class="major centerTitle">Specifics of Features Implemented</h2>
+        <h3 class="major centerTitle">Maths Library</h3>
+        <p>
+            A Maths Library is a critical feature of a cross-platform engine as many core features will rely on the functions and structs that are present within.
+            I designed how the Maths Library works as well as added some of the functionality.
+            <br/><br/>
+            The functionality I added was Vector2, Vector3 and Vector4 classes. These each overloaded the +, -, *, /, +=, -=, *=, /=, == and != operators.
+            As well as this, each class also contained functions, as well as static functions, to calculate dot, angle, magnitude, magnitude squared and vector normalized.
+            <br/>
+            Each one also contained static initializers for One and Zero, returning vectors that are prefilled with values. Vector2 and Vector3 also contain Up, Down,
+            Left and Right initializers with Vector3 also containing Forward and Back - contextually indicating that Vector2 and Vector3 are used for 2D and 3D coordinate spaces.
+            <br/><br/>
+            Functions to calculate orthogonal projection and look-to view matrices were also added, although, many of the values that would be used were not, as the engine is
+            specifically targeting 2D rendering.
+        </p>
+        <h3 class="major centerTitle">Renderer - DirectX 11</h3>
+        <p>
+            The DirectX 11 Renderer is the primary renderer of the project, with a different renderer having to be used for the PlayStation 5 Port of the Project.
+            <br/><br/>
+            The Renderers were implemented are in a way that means a specifical renderer could be conditionally compiled for the platform. The header file for the renderer
+            acts as an interface for each renderer. Then, the implementation is linked at compile time - through selecting the implementation file.
+            <br/><br/>
+            As the project is 2D and sprite-based, the renderer interface was specialised to simply being able to call renderer::draw_sprite() which then
+            is processed by the renderer itself, breaking down the tasks required to draw a sprite - such as binding data to shaders and dispatching draw calls.
+            There is a layer system within the renderer, that allows you to determine in what order, from zero, the order in which sprites are rendered. This allows skipping a depth
+            texture and query to see if something can render. As quads are very cheap to render, this speeds up the renderer over using a Z-test. Whilst this may have several overlapping renders
+            the quads are rendered in full bright, as explored later in the lighting explanation - making the pixel shader cost virtually a texture lookup.
+            Furthermore, the sprite renderer supports flipping, tinting and scaling and UVs for sprite-map lookup.
+            <br/>
+            Around this, the renderer also has some extra functions that facilitate more of the renderer functionality. These are de/register_texture(),
+            register_point/directional_light(), draw_sprite_late() and set_render_camera().
+            <br/>
+            Registering and deregistering a texture involves utilising the global unique identifier given to each texture fetched by the asset pipeline and
+            passing this, along with a void* and texture resolution to the renderer to create a renderer specific resource. For example, in DirectX 11,
+            textures need to be bound to a ID3D11ShaderResourceView, whereas this may not be the same in another renderer API. This is then, within the DirectX 11 renderer,
+            inserted into a std::map of identifier and SRV.
+            <br/>
+            Registering point or directional lights passes the data required for each light to be rendered that frame - this is then handled in a separate shader pass.
+            By default, the scene is rendered in full bright, and in the Windows version, an extra render-pass occurs, calculating the lighting and then being combined with the full bright
+            output.
+            <br/>
+            Drawing a sprite late draws a sprite after the rest of the rendering has taken place. This is used to render the cursor correctly, on top of all things on the screen.
+            <br/>
+            Finally, setting the render camera sets which camera should be used to render the scene. A quirk of this is that if there are multiple cameras, and more than one is
+            active, the last camera called will be the one that is rendered with.
+            <br/><br/>
+            To facilitate much of the previously discussed engine features, wrappers around DirectX 11 datatypes were created.
+            <br/>
+            For example, SRVResource was created to wrap data management for a ID3D11ShaderResourceView. This provides a few helper functions to manage a ID3D11ShaderResourceView.
+            Lighting can have many lights passed to the renderer, SRVResource can be used to resize the ID3D11ShaderResourceView at a rate of 2(n), as well as mapping to the GPU.
+            <br/>
+            Others include BufferResource for ID3D11Buffer and Texture2DResource for ID3D11Texture2D, ID3D11RenderTargetView and ID3D11ShaderResourceView.
+        </p>
+
+        <h3 class="major centerTitle">Scene Graph, Game Object and Component System</h3>
+        <p>
+            The Scene Graph, Game Object and Component system are heavily connected, with the Scene Graph containing Game Objects which contain Components.
+            The Scene Graph is responsible for the correct creation and destruction of Game Objects as well as querying the Scene for Game Objects.
+            <br/>
+            Game Objects are a critical feature as they contain Components, which provide functionality to the whole engine.
+            Game Objects use perfect forwarding to perform in-place construction of Components on the Game Object itself. This avoids creating and copying Components
+            and tethers a Component to a GameObject concretely. This combined with C++20's Concepts means that compile-time checks for add_component(type, args)
+            ensures that the Component is constructable.
+            <br/>
+            The Game Object is also responsible for determining the functionality required by the Component.
+            Components can have several events that can be added - these are on_begin(), on_remove(), on_update(), on_fixed_update(), on_draw(), on_collision_enter() and on_collision_exit().
+            These events are not part of the parent class BaseComponent, but instead is checked if it exists at run-time, through templates - using std::same_as.
+            This has the bonus of not having to do a v-table look up for every Component in the scene, as well as, if it does not get compiled away, calling empty functions.
+
+            <br/><br/>
+            Based on work performed for the Component-creation system, the Tile Map Component functions in a similar way - with it being able to hold any component type within,
+            and construct it with emplacement.
+            This means that the Tile Map Component is completely independent to the implementations of each component and wraps the functionality of each one inside of it.
+            In almost functions like a Game Object, in that way.
+        </p>
+    </div>
+</section>
+
+<!-- Footer -->
+<section id="footer">
+    <ul class="icons">
+        <li class="icon"><i class="fa-brands fa-linkedin"></i> - <a href="https://linkedin.com/in/ethirix" target="_blank">Jack Wright</a></li>
+        <li class="icon"><i class="fa-brands fa-github"></i> - <a href="https://github.com/ethirix" target="_blank">Ethirix</a></li>
+        <!--<li class="icon"><i class="fa-brands fa-twitter"></i> - <a href="https://twitter.com/ethirix" target="_blank">@Ethirix</a>-->
+        <li class="icon"><i class="fa-brands fa-bluesky"></i> - <a href="https://bsky.app/profile/ethirix.dev" target="_blank">@ethirix.dev</a>
+        </li>
+    </ul>
+    <ul class="copyright">
+        <li>&copy; Jack Wright - All rights reserved.</li>
+        <li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
+    </ul>
+</section>
+
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.scrolly.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</body>
