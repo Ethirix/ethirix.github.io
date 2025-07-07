@@ -113,46 +113,27 @@
             <br/>
             Game Objects are a critical feature as they contain Components, which provide functionality to the whole engine.
             Game Objects use perfect forwarding to perform in-place construction of Components on the Game Object itself. This avoids creating and copying Components
-            and tethers a Component to a GameObject concretely. As well as this, the Game Object is responsible for determining the functionality required by the Component.
-            Components can have several func
+            and tethers a Component to a GameObject concretely. This combined with C++20's Concepts means that compile-time checks for add_component(type, args)
+            ensures that the Component is constructable.
+            <br/>
+            The Game Object is also responsible for determining the functionality required by the Component.
+            Components can have several events that can be added - these are on_begin(), on_remove(), on_update(), on_fixed_update(), on_draw(), on_collision_enter() and on_collision_exit().
+            These events are not part of the parent class BaseComponent, but instead is checked if it exists at run-time, through templates - using std::same_as.
+            This has the bonus of not having to do a v-table look up for every Component in the scene, as well as, if it does not get compiled away, calling empty functions.
 
+            <br/><br/>
+            Based on work performed for the Component-creation system, the Tile Map Component functions in a similar way - with it being able to hold any component type within,
+            and construct it with emplacement.
+            This means that the Tile Map Component is completely independent to the implementations of each component and wraps the functionality of each one inside of it.
+            In almost functions like a Game Object, in that way.
         </p>
-
-
-        <!--forum posts
-        To bring the these systems up to scratch, I updated the SceneGraph to be the only thing to be able to create GameObjects and GameObjects to create Components.
-        To achieve this, GameObject friends SceneGraph - this way the constructor for a GameObject can be private so that a GameObject can only physically exist within a scene.
-        Components, before the refactor, already required that a GameObject* is passed in their constructor to BaseComponent,
-        however I took the construction of Components to be in-place on a GameObject - using the same idea as that of the TileMapComponent - where perfect forwarding is used.
-        This combined with C++20's Concepts means that I can enforce compile-time checks to GameObject::add_component<type>(args)
-        to ensure that the Component is constructable and has a GameObject* in the first argument of any constructor.
-        This combined with the SceneGraph change, where you must do SceneGraph::add_game_object() to create a new GameObject,
-        creates a strict but highly dynamic system to add new things to the game.
-
-        On top of all of this, the event system was added to the components, so that on_begin(), on_update(), on_fixed_update(), on_draw(), on_remove()
-        and maybe some collision based ones could be integrated. This also uses C++20 concepts, using std::same_as with a constexpr if statement to determine if the functions exist.
-        If they do an event is registered on the GameObject with a self-event deregistration. This way there is no v-table lookup and only Components that need an event use it,
-        instead of potentially thousands of components all calling empty functions - if they do not get compiler-optimized away.
-
-         Based on work from the Renderer and Sprite Renderer Component, a Tile Map Component that can hold any other component was added.
-         The Tile Map Component could construct any component without the need for custom constructors through the use of perfect forwarding with templates and std::forward().
-         This means that Tile Map Component is fully independent to the implementations of each component and would forward any events from the Scene when implemented to them.
-         In essence, becomes a wrapper for a scene, in-and-of-itself.
-
-         First thing first this week was implemented a dedicated Camera Component as previously the cameras matrices were hard coded to the renderers.
-         This mainly involved moving the data to its own component and hooking in the on_draw function but the renderer interface needed a way to pass in this data.
-         This was added through the use of Renderer::set_render_camera() which takes a position and the view-projection matrix (pre multiplied).
-         There are a few potential graphical issues that can arise when no Camera is set, one being a camera locked to the world origin and the aspect ratio stretched,
-         the other being the entire render pipeline being black.
-        -->
     </div>
 </section>
 
 <!-- Footer -->
 <section id="footer">
     <ul class="icons">
-        <li class="icon"> <i class="fa-brands fa-linkedin"></i> - <a href="https://linkedin.com/in/ethirix" target="_blank">Jack
-            Wright</a></li>
+        <li class="icon"><i class="fa-brands fa-linkedin"></i> - <a href="https://linkedin.com/in/ethirix" target="_blank">Jack Wright</a></li>
         <li class="icon"><i class="fa-brands fa-github"></i> - <a href="https://github.com/ethirix" target="_blank">Ethirix</a></li>
         <!--<li class="icon"><i class="fa-brands fa-twitter"></i> - <a href="https://twitter.com/ethirix" target="_blank">@Ethirix</a>-->
         <li class="icon"><i class="fa-brands fa-bluesky"></i> - <a href="https://bsky.app/profile/ethirix.dev" target="_blank">@ethirix.dev</a>
