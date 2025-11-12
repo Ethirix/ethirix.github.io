@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<!--
+    Solid State by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en-gb">
+<head>
+    <title>GTA V Mods - Portfolio</title>
+    <link href="../images/favicon.png" rel="icon" type="image/x-icon">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport"/>
+    <link href="../assets/css/main.css" rel="stylesheet"/>
+    <noscript>
+        <link href="../assets/css/main.css" rel="stylesheet"/>
+    </noscript>
+</head>
+<body class="is-preload">
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+    <section id="header" style="background-image: url(../images/connect_four_wpf_header_image.avif);
+background-size: cover; background-position: center; background-attachment: local">
+        <h1 class="pageTitle" style="color: white;
+            text-shadow: -1px -1px black, 1px -1px black, 1px 1px black, -1px 1px black;">
+            Self Projects - Connect Four WPF
+        </h1>
+        <p class="pageTagline">Connect Four, remade for Desktop.</p>
+
+    </section>
+
+    <a class="button backButton" href="../index.html">
+        <p class="backButton">BACK</p>
+    </a>
+
+    <!-- One -->
+    <section class="main style1" id="one" style="padding: 2em 1em 2em 1em">
+        <div class="container" style="text-align: left">
+            <h3 class="major centerTitle">Description</h3>
+            <p>
+                To learn C#, .NET and WPF, I recreated Connect Four for desktop. It features local play, local multiplayer 
+                and statistics.
+                The local multiplayer was achieved by having a two-player login system.
+            </p>
+            
+            <h3 class="major centerTitle">Main Menu</h3>
+            <img alt="Connect Four Main Menu" style="display: block; width: 100%;"
+                src="../images/connect_four_main_menu_image.avif"/>
+            <p>
+                This is the main menu, from here is access to all the features of the project. From logging in and signing
+                up to playing against someone else locally.
+            </p>
+            <h3 class="major centerTitle">Connectivity</h3>
+            <p>
+                Players can log in to be able to show their username and track their statistics whilst playing Connect Four.
+                The game does not have any matchmaking or online-play features, however, it does have the necessary
+                pre-requisites to add those features to the game in an alternative version of this. Users logins are stored
+                in an SQL Database and the passwords are hashed using PBKDF2 and salted 50000 times.
+            </p>
+            <h3 class="major centerTitle">Gameplay</h3>
+            <img alt="Connect Four Gameplay Image" style="display: block; width: 100%;"
+                 src="../images/connect_four_description_image.avif"/>
+            <p>
+                Above is a sample of Gameplay between two players that have logged into the game. These players, when
+                playing against each other will have the statistics from each game registered to the SQL database that
+                can then be viewed later by going to the statistics page on the main menu.
+                <br/>
+                On the main menu, whoever logs in as Player One will be Red and the same for Player Two and Yellow.
+                For this reason, the main menu has an option to swap the players around so that players can swap who goes
+                first.
+            </p>
+            <img alt="Connect Four Statistics Page" style="display: block; width: 100%;"
+                 src="../images/connect_four_gameplay_statistics_image.avif"/>
+            <p>
+                The statistics gathered are limited but as this was more of a proof of concept than a full-blown statistics
+                page, this shows how many times played as either a pie chart or a bar chart. These charts were created using
+                LiveCharts. When a user is logged in, they would be able to access this page and see their statistics - loaded
+                from the SQL database.
+            </p>
+        </div>
+        
+    </section>
+</div>
+
+<!-- Footer -->
+<section id="footer">
+    <ul class="icons">
+        <li class="icon"> <i class="fa-brands fa-linkedin"></i> - <a href="https://linkedin.com/in/ethirix" target="_blank">Jack
+            Wright</a></li>
+        <li class="icon"><i class="fa-brands fa-github"></i> - <a href="https://github.com/ethirix" target="_blank">Ethirix</a></li>
+        <!--<li class="icon"><i class="fa-brands fa-twitter"></i> - <a href="https://twitter.com/ethirix" target="_blank">@Ethirix</a>-->
+        <li class="icon"><i class="fa-brands fa-bluesky"></i> - <a href="https://bsky.app/profile/ethirix.dev" target="_blank">@ethirix.dev</a>
+        </li>
+    </ul>
+    <ul class="copyright">
+        <li>&copy; Jack Wright - All rights reserved.</li>
+        <li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
+    </ul>
+</section>
+
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.scrolly.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</body>
